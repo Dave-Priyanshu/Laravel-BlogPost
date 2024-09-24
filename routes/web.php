@@ -13,10 +13,24 @@ use App\Http\Controllers\DashboardController;
 //! simple way if you only wanted to return a view file
 Route::view('/','posts.index')->name('home');
 
-// display register form only & get form data
-Route::view('/register','auth.register')->name('register');
-Route::post('/register',[AuthController::class,'register']);
+Route::middleware('auth')->group(function(){
 
+    //dashboard route
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    
+    //logout
+    Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+});
+
+Route::middleware('guest')->group(function() {
+
+    // display register form only & get form data
+    Route::view('/register','auth.register')->name('register');
+    Route::post('/register',[AuthController::class,'register']);
+    
+    Route::view('/login','auth.login')->name('login');
+    Route::post('/login',[AuthController::class,'login']);
+});
 
 Route::get('/editor', function(){
     return view('editor');

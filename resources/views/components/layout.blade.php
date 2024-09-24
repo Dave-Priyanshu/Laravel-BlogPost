@@ -22,18 +22,27 @@
                 </button>
 
                 {{-- Dropdown menu --}}
-                <div x-show="open" @click.outside="open = false" class="dropdown">
-                    <p class="username">{{ auth()->user()->username }}</p>
-                    <a href="#" class="block hover:bg-slate-100">DashBoard</a>
-                    <a href="#" class="block hover:bg-slate-100">Profile</a>
-                    <a href="#" class="block hover:bg-slate-100">Logout</a>
+                <div x-show="open" @click.outside="open = false" class="dropdown bg-white shadow-lg rounded-lg p-2 absolute right-0 z-10">
+                    <p class="username font-semibold text-gray-800">{{ auth()->user()->username }}</p>
+                    
+                    {{-- Dashboard Link --}}
+                    <a href="{{ route('dashboard') }}" class="block hover:bg-slate-100 px-4 py-2 rounded">Dashboard</a>
+
+                    {{-- Profile Link --}}
+                    <a href="#" class="block hover:bg-slate-100 px-4 py-2 rounded">Profile</a>
+
+                    {{-- Logout Form --}}
+                    <form action="{{ route('logout') }}" method="POST" class="">
+                        @csrf
+                        <button type="submit" class="block text-left hover:bg-slate-100 px-4 py-2 rounded w-full">Logout</button>
+                    </form>
                 </div>
             </div>
         @endauth
             
             @guest
             <div class="flex items-center gap-4">
-                <a href="#" class="nav-link">Login</a>
+                <a href="{{ route('login')}}" class="nav-link">Login</a>
                 <a href="{{ route('register')}}" class="nav-link">Register</a>
             </div>
             @endguest
