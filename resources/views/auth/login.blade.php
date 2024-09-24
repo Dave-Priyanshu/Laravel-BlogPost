@@ -30,11 +30,11 @@
                 <label for="remember" class="ml-2 text-sm font-medium text-gray-700">Remember me</label>
             </div>
         
-            {{-- Show/Hide Password Feature --}}
+            {{-- Show/Hide Password Feature
             <div class="flex items-center mb-4">
                 <input type="checkbox" id="show-password" class="mr-2">
                 <label for="show-password" class="text-sm">Show Password</label>
-            </div>
+            </div> --}}
 
             @error('failed')
                     <p class="error"> {{$message}}</p>

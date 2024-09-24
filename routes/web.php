@@ -4,14 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 
-// !long way 
-// Route::get('/', function () {
-//     return view('posts.index');
-// })->name('home');
+Route::redirect('/','posts');
 
-//! simple way if you only wanted to return a view file
-Route::view('/','posts.index')->name('home');
+Route::resource('posts',PostController::class);
 
 Route::middleware('auth')->group(function(){
 
