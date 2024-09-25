@@ -1,6 +1,6 @@
 @props(['post', 'full' => false, 'fullSize'=> false])
 
-<div class="card bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out hover:shadow-xl">
+<div class="card bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out hover:shadow-xl ">
     
     {{-- Cover photo --}}
     <div class="w-full {{ $fullSize ? 'h-auto': 'h-64' }} mt-4 flex justify-center items-center">
