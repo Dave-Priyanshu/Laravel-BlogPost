@@ -16,7 +16,7 @@
         @endif
 
         {{-- create post form --}}
-        <form action="{{ route('posts.store') }}" method="POST">
+        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             {{-- Post Title --}}
@@ -41,6 +41,17 @@
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
+
+            {{-- Post Image --}}
+            <div class="mb-4">
+                <label for="image">Cover Photo</label>
+                <input type="file" name="image" id="image">
+                
+                @error('image')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            
 
             {{-- Submit Button --}}
             <button type="submit" 
