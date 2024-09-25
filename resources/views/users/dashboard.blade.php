@@ -5,6 +5,15 @@
     <div class="card mb-8 bg-white shadow-md rounded-lg p-6">
         <h2 class="font-bold text-xl mb-4">Create a New Post</h2>
 
+        
+        {{-- session msg --}}
+        @if (session('success'))
+        <div class="mb-4">
+            <x-flashMsg msg="{{ session('success') }}"  />
+        </div>
+        @endif
+
+
         <form action="{{ route('posts.store') }}" method="POST">
             @csrf
 
@@ -14,7 +23,7 @@
                 <input type="text" name="title" value="{{ old('title') }}" 
                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 transition duration-200 ease-in-out" 
                        placeholder="Enter the post title" 
-                       required>
+                       >
                 @error('title')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -25,7 +34,7 @@
                 <label for="body" class="block text-sm font-medium text-gray-700">Post Body</label>
                 <textarea name="body" rows="5" 
                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 transition duration-200 ease-in-out" 
-                          placeholder="Write your post content here" required>{{ old('body') }}</textarea>
+                          placeholder="Write your post content here" >{{ old('body') }}</textarea>
                 @error('body')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -37,5 +46,18 @@
                 Create Post
             </button>
         </form>
+    </div>
+
+    {{-- Users Posts --}}
+    <h2 class="font-bold text-2xl text-gray-800 mb-6 border-b pb-4">Your Recent Posts</h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        @foreach ($posts as $post)
+            <x-postCard :post="$post"/>
+        @endforeach
+    </div>
+
+    <div class="mt-6">
+        {{ $posts->links() }}
     </div>
 </x-layout>
