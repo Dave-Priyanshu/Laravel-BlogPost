@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="text-2xl font-bold text-center my-6">Welcome Back</h1>    
+    <h1 class="text-2xl font-bold text-center border-b pb-2 my-6">Welcome Back</h1>    
 
     <div class="mx-auto max-w-screen-sm p-6 bg-white rounded-lg shadow-lg">
 
@@ -46,12 +46,12 @@
 
             {{-- Social Media Login Options --}}
             <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="bg-red-600 text-white rounded-md px-4 py-2 hover:bg-red-700 transition duration-200">Register with Google</a>
+                <a href="{{ route('googlelogin') }}" class="bg-red-600 text-white rounded-md px-4 py-2 hover:bg-red-700 transition duration-200">Register with Google</a>
                 {{-- <a href="#" class="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition duration-200">Register with Facebook</a> --}}
             </div>
 
             <div class="text-sm text-center mt-4">
-                <p>Don't have an account? <a href="#" class="text-blue-600 hover:underline">Create One</a>.</p>
+                <p>Don't have an account? <a href="{{ route('register') }}" class="text-blue-600 hover:underline">Create One</a>.</p>
             </div>
         </form>
     </div>

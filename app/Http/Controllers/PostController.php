@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
-class PostController extends Controller
-
+class PostController extends Controller implements HasMiddleware
 {
+
+    public static function middleware():array
+    {
+        return([
+            new Middleware('auth',except:['index','show']),
+        ]);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -59,24 +68,38 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        Gate::authorize('modify',$post);
+        
+        return view('posts.edit',['post'=>$post]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Post $post)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        // dd('ok');
-        $post->delete();
+        Gate::authorize('modify',$post);
+        //vadlidate
+        $fields = $request->validate([
+            'title'=>['required','max:255'],
+            'body'=>['required']
+            ]);
+            
+            //Update post
+            $post->update($fields);
+            
+            //redirect user to dashboard
+            return redirect()->route('dashboard')->with('success','Your post is updated successfully');
+        }
+        
+        /**
+         * Remove the specified resource from storage.
+         */
+        public function destroy(Post $post)
+        {
+            // dd('ok');
+            Gate::authorize('modify',$post);
+            $post->delete();
 
         return back()->with('delete','Your post is deleted.');
     }

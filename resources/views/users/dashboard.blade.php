@@ -3,13 +3,11 @@
         Welcome, {{ auth()->user()->username }}! You have created {{ $posts->total() }} posts.
     </h1>
     
-    
 
     {{-- Create Post Form --}}
     <div class="card mb-8 bg-white shadow-md rounded-lg p-6">
-        <h2 class="font-bold text-xl mb-4">Create a New Post</h2>
+        <h2 class="font-bold text-2xl text-gray-800 mb-6 border-b pb-2">Create a New Post</h2>
 
-        
         {{-- session msg --}}
         @if (session('success'))
             <x-flashMsg msg="{{ session('success') }}"  />
@@ -17,7 +15,7 @@
             <x-flashMsg msg="{{ session('delete')}}" bg="bg-red-500"/>
         @endif
 
-
+        {{-- create post form --}}
         <form action="{{ route('posts.store') }}" method="POST">
             @csrf
 
@@ -58,12 +56,20 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($posts as $post)
             <x-postCard :post="$post">
-                {{-- Delete post button --}}
-                <form action="{{ route('posts.destroy', $post) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
-                </form>
+                {{-- Update post button --}}
+<a href="{{ route('posts.edit', $post) }}" class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 text-sm rounded-md shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    Edit
+</a>
+
+{{-- Delete post button --}}
+<form action="{{ route('posts.destroy', $post) }}" method="POST" class="inline-block">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="inline-block bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 text-sm rounded-md shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-red-400">
+        Delete
+    </button>
+</form>
+
             </x-postCard>
         @endforeach
     </div>
