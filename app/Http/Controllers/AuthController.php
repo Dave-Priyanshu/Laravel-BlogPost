@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,8 +27,32 @@ class AuthController extends Controller
         //Login
         Auth::login($User);
 
+        event(new Registered($User));
+        
+
         //Redirect
-        return redirect()->route('posts.index');
+        // return redirect()->route('posts.index');
+        return redirect()->route('dashboard');
+
+    }
+
+    //email verification
+    public function verifyNotice(){
+        return view('auth.verify-email');
+    }
+    
+    //email verification handler
+    public function verifyEmail(EmailVerificationRequest $request) {
+        $request->fulfill();
+     
+        return redirect()->route('dashboard');
+    }
+
+     //Resending the Verification Email
+     public function verifyhandler(Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+     
+        return back()->with('message', 'Verification link sent!');
     }
 
 

@@ -12,3 +12,4 @@
         <img src="{{ $message->embed('storage/'.$post->image) }}" alt="Post Image" style="max-width: 80%; height: auto; border-radius: 8px;">
     </div>
 </div>
+

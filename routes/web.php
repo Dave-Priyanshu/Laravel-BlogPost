@@ -5,6 +5,7 @@ use App\Http\Controllers\EditorController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::redirect('/','posts');
@@ -16,10 +17,19 @@ Route::get('/{user}/posts',[DashboardController::class,'userPosts'])->name('post
 Route::middleware('auth')->group(function(){
 
     //dashboard route
-    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'index'])->middleware('verified')->name('dashboard');
     
     //logout
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+
+    //email verificaiton notice route
+    Route::get('/email/verify',[AuthController::class,'verifyNotice'])->name('verification.notice');
+
+    //email verification handler
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class,'verifyEmail'])->middleware('signed')->name('verification.verify');
+
+    //Resending the Verification Email
+    Route::post('/email/verification-notification', [AuthController::class,'verifyhandler'])->middleware( 'throttle:6,1')->name('verification.send');
 });
 
 Route::middleware('guest')->group(function() {

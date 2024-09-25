@@ -3,7 +3,7 @@
 
     <div class="mx-auto max-w-screen-sm p-6 bg-white rounded-lg shadow-lg">
 
-        <form action="{{ route('register')}}" method="POST">
+        <form action="{{ route('register')}}" method="POST" x-data="formSubmit" @submit.prevent="submit">
             @csrf
 
             {{-- Username --}}
@@ -40,14 +40,14 @@
                 <input type="password" name="password_confirmation" id="password_confirmation" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2" placeholder="Re-enter your password" >
             </div>
 
-            {{-- Show/Hide Password Feature --}}
+            {{-- Show/Hide Password Feature
             <div class="flex items-center mb-4">
                 <input type="checkbox" id="show-password" class="mr-2">
                 <label for="show-password" class="text-sm">Show Password</label>
-            </div>
+            </div> --}}
 
             <div class="mb-4">
-                <button type="submit" class="w-full bg-blue-600 text-white font-semibold rounded-md py-2 hover:bg-blue-700 transition duration-200">Register</button>
+                <button x-ref="btn" type="submit" class="w-full bg-blue-600 text-white font-semibold rounded-md py-2 hover:bg-blue-700 transition duration-200">Register</button>
             </div>
 
             {{-- Social Media Login Options --}}
