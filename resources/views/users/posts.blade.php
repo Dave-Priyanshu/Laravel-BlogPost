@@ -1,6 +1,6 @@
 <x-layout>
 
-    <h1 class="title text-3xl font-bold text-blue-600 mb-8 tracking-wide border-b-2 border-blue-300 pb-4">
+    <h1 class="title text-3xl font-bold text-blue-600 mb-8 tracking-wide border-b-2  pb-4">
         {{$user->username}}'s Latest {{ $posts->total() }} Posts
     </h1>
     

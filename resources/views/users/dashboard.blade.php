@@ -1,5 +1,9 @@
 <x-layout>
-    <h1 class="title text-3xl font-bold text-gray-800 mb-8">Hello, {{ auth()->user()->username }}</h1>
+    <h1 class="title text-3xl font-bold  text-gray-800 mb-8">
+        Welcome, {{ auth()->user()->username }}! You have created {{ $posts->total() }} posts.
+    </h1>
+    
+    
 
     {{-- Create Post Form --}}
     <div class="card mb-8 bg-white shadow-md rounded-lg p-6">
@@ -8,9 +12,9 @@
         
         {{-- session msg --}}
         @if (session('success'))
-        <div class="mb-4">
             <x-flashMsg msg="{{ session('success') }}"  />
-        </div>
+        @elseif (session('delete'))
+            <x-flashMsg msg="{{ session('delete')}}" bg="bg-red-500"/>
         @endif
 
 
@@ -53,7 +57,14 @@
     
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($posts as $post)
-            <x-postCard :post="$post"/>
+            <x-postCard :post="$post">
+                {{-- Delete post button --}}
+                <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
+                </form>
+            </x-postCard>
         @endforeach
     </div>
 
