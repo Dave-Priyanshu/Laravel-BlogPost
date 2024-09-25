@@ -1,6 +1,6 @@
-@props(['post'])
+@props(['post','full'=>false])
 
-<div class="card bg-white shadow-md rounded-lg p-6 transition duration-300 ease-in-out hover:shadow-lg hover:scale-105">
+<div class="card bg-white shadow-md rounded-lg p-6 transition duration-300 ease-in-out hover:shadow-lg ">
     {{-- Title --}}
     <h2 class="font-bold text-2xl text-gray-800 mb-2">{{ $post->title }}</h2>
 
@@ -11,14 +11,22 @@
     </div>
 
     {{-- Body --}}
+    @if ($full)
+    <div class="text-sm text-gray-700">
+        <p>{{($post->body) }}</p>
+    </div>    
+    @else
     <div class="text-sm text-gray-700">
         <p>{{ Str::words($post->body, 15) }}</p>
+        {{-- Read More Button --}}
+        <a href="{{ route('posts.show', $post) }}" class="inline-block mt-4 text-sm text-blue-500 hover:text-blue-700 font-medium">
+            Read More →
+        </a>
     </div>
+    @endif
+    
     
     
 
-    {{-- Read More Button --}}
-    <a href="{{ route('posts.show', $post->id) }}" class="inline-block mt-4 text-sm text-blue-500 hover:text-blue-700 font-medium">
-        Read More →
-    </a>
+    
 </div>
