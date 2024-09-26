@@ -1,5 +1,10 @@
 <x-layout>
-    <h1 class="text-2xl font-bold text-center border-b pb-2 my-6">Welcome Back</h1>    
+    <h1 class="text-2xl font-bold text-center border-b pb-2 my-6">Login to your account</h1>    
+
+    {{-- session msg --}}
+    @if (session('status'))
+        <x-flashMsg msg="{{ session('status') }}"  />
+    @endif
 
     <div class="mx-auto max-w-screen-sm p-6 bg-white rounded-lg shadow-lg">
 
@@ -25,9 +30,14 @@
             </div>
 
             {{-- Remember me checkbox --}}
-            <div class="mb-4 flex items-center">
-                <input type="checkbox" name="remember" id="remember" class="toggle-checkbox">
-                <label for="remember" class="ml-2 text-sm font-medium text-gray-700">Remember me</label>
+            <div class="mb-4 flex items-center justify-between">
+                <div class="flex items-center">
+                    <input type="checkbox" name="remember" id="remember" class="toggle-checkbox">
+                    <label for="remember" class="ml-2 text-sm font-medium text-gray-700">Remember me</label>
+                </div>
+                <div class="text-sm">
+                    <a href="{{ route('password.request') }}" class="text-blue-600 hover:text-blue-800 transition duration-200">Forgot your password?</a>
+                </div>
             </div>
         
             {{-- Show/Hide Password Feature
