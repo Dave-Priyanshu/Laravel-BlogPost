@@ -6,6 +6,28 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+Blog Posting Website
+Note: This README file will be updated over time as new features are added. Stay tuned for upcoming updates!
+
+Overview
+This project is a simple and user-friendly blog posting website built with Laravel. The platform allows users to create, view, and manage blog posts, with authentication and profile creation features included. Below are the current features and planned future updates.
+
+Current Features
+1. Simple and Easy Design
+A clean, minimal interface that is easy to navigate, making it accessible for users of all types.
+2. Email Authentication
+Users must sign up and verify their email before creating, updating, or deleting blog posts.
+After every new post creation, users receive an email with details of the post they’ve created.
+3. User Interaction
+Users can view posts by other users by clicking the author's name on the post card, leading to the author’s profile.
+4. Home Page
+A public homepage displaying all blog posts, accessible to everyone without requiring login.
+5. Profile Creation
+Users can create their own profiles after simple email verification, making it easier for others to interact with their content.
+Planned Features
+Google Login: Integrating Google login for easier access and registration.
+Search & Filter: Adding a feature to search and filter posts based on tags, author names, and content.
+Responsive Design: Ensuring the website is fully responsive on all devices for an optimal user experience.
 
 ## About Laravel
 
