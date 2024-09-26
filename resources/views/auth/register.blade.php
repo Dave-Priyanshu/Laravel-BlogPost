@@ -46,6 +46,13 @@
                 <label for="show-password" class="text-sm">Show Password</label>
             </div> --}}
 
+            {{-- subscribe checkbox --}}
+            <div class="flex items-center mb-4">
+                <input type="checkbox" name="subscribe" id="subscribe" class="toggle-checkbox mr-2" >
+                <label for="subscribe" class="text-sm">Subscribe to our newsletter</label>
+            </div>
+
+            {{-- Submit button --}}
             <div class="mb-4">
                 <button x-ref="btn" type="submit" class="w-full bg-blue-600 text-white font-semibold rounded-md py-2 hover:bg-blue-700 transition duration-200">Register</button>
             </div>

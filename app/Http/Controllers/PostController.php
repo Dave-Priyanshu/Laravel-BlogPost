@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserSubscribed;
 use App\Mail\WelcomeMail;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
+        
         
 
         // $posts = Post::orderBy('created_at','desc')->get();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserSubscribed;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -28,11 +29,18 @@ class AuthController extends Controller
         Auth::login($User);
 
         event(new Registered($User));
-        
 
+        if($request->subscribe){
+            event(new UserSubscribed($User));
+        }
+        
         //Redirect
-        // return redirect()->route('posts.index');
-        return redirect()->route('dashboard');
+        /*by using this route user is able to see the home page and the posts inside the page
+        as well*/ 
+        return redirect()->route('posts.index'); 
+
+        /* by using the below route user must login before reading other posts */
+        // return redirect()->route('dashboard');
 
     }
 
