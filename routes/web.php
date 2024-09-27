@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\admin\UserController;
 
 
 Route::redirect('/','posts');
@@ -14,6 +15,9 @@ Route::redirect('/','posts');
 Route::resource('posts',PostController::class);
 
 Route::get('/{user}/posts',[DashboardController::class,'userPosts'])->name('posts.user');
+
+//! admin side routess...........................................................
+Route::get('/admin-users',[UserController::class,'showUsers'])->name('admin.users');
 
 
 //routes for auth users
@@ -45,6 +49,14 @@ Route::middleware('guest')->group(function() {
     
     Route::view('/login','auth.login')->name('login');
     Route::post('/login',[AuthController::class,'login']);
+    
+    //rules route
+    Route::view('/rules','rules')->name('rules');
+
+    Route::get('/upcoming-features', function () {
+        return view('upcomingFeatures');
+    })->name('upcomingFeatures');
+    
 
     //forgot password route
     Route::view('/forgot-password','auth.forgot-password')->name('password.request');
