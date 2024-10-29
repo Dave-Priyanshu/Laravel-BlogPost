@@ -22,10 +22,13 @@
             <nav>
                 <ul class="space-y-4">
                     <li>
-                        <a href="#" class="text-lg font-semibold hover:bg-blue-700 p-3 block rounded">Dashboard</a>
+                        <a href="{{route('admin.dashboard')}}" class="text-lg font-semibold hover:bg-blue-700 p-3 block rounded">Dashboard</a>
                     </li>
                     <li>
                         <a href="{{route('admin.users')}}" class="text-lg font-semibold hover:bg-blue-700 p-3 block rounded">Users</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.posts')}}" class="text-lg font-semibold hover:bg-blue-700 p-3 block rounded">Posts</a>
                     </li>
                     <li>
                         <a href="#" class="text-lg font-semibold hover:bg-blue-700 p-3 block rounded">Settings</a>

@@ -17,7 +17,9 @@ Route::resource('posts',PostController::class);
 Route::get('/{user}/posts',[DashboardController::class,'userPosts'])->name('posts.user');
 
 //! admin side routess...........................................................
+Route::view('/admin-dashboard','admin.dashboard')->name('admin.dashboard');
 Route::get('/admin-users',[UserController::class,'showUsers'])->name('admin.users');
+Route::get('/admin-users-posts',[UserController::class,'showPosts'])->name('admin.posts');
 
 
 //routes for auth users

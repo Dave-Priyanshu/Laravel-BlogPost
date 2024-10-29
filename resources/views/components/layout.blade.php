@@ -31,7 +31,7 @@
                     <a href="{{ route('rules')}}" class="nav-link text-white">Rules</a>
                     <a href="{{ route('login')}}" class="nav-link text-white">Login</a>
                     <a href="{{ route('register')}}" class="nav-link text-white">Register</a>
-                    <a href="{{ route('admin.users')}}" class="nav-link text-white">admin users</a>
+                    {{-- <a href="{{ route('admin.users')}}" class="nav-link text-white">admin</a> --}}
                 @endguest
             </div>
         </nav>
