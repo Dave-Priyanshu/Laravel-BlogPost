@@ -37,14 +37,14 @@ class AuthController extends Controller
         //Redirect
         /*by using this route user is able to see the home page and the posts inside the page
         as well*/ 
-        return redirect()->route('posts.index'); 
+        return redirect()->route($User->is_admin ? 'admin.dashboard' : 'posts.index');
 
         /* by using the below route user must login before reading other posts */
         // return redirect()->route('dashboard');
 
     }
 
-    //email verification
+    //email verification notice for both admin and users
     public function verifyNotice(){
         return view('auth.verify-email');
     }
@@ -52,8 +52,7 @@ class AuthController extends Controller
     //email verification handler
     public function verifyEmail(EmailVerificationRequest $request) {
         $request->fulfill();
-     
-        return redirect()->route('dashboard');
+        return redirect()->route(Auth::user()->is_admin ? 'admin.dashboard' : 'dashboard');
     }
 
      //Resending the Verification Email
@@ -74,7 +73,13 @@ class AuthController extends Controller
 
         //try to login as user
         if(Auth::attempt($feilds,$request->remember)){
-            return redirect()->intended();
+            $user = Auth::user();
+
+            //check login for admin
+            if($user->is_admin){
+                return redirect()->intended(route('admin.dashboard'));
+            }
+            return redirect()->intended(route('dashboard'));
         }else{
             return back()->withErrors([
                 'failed' => 'The credentials you entered do not match our records. Please double-check your email and password and try again.'

@@ -41,10 +41,15 @@
         <div class="flex-1 flex flex-col">
             <!-- Header -->
             <header class="bg-white shadow p-4 flex justify-between items-center">
-                <h1 class="text-3xl font-semibold text-gray-800">Dashboard</h1>
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-300">
-                    Logout
-                </button>
+                @auth
+                <a href="{{ route('admin.dashboard')}}" class="text-3xl font-semibold text-gray-800">Dashboard</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                            Logout
+                        </button>
+                    </form>
+                @endauth
             </header>
 
             <!-- Main Content -->

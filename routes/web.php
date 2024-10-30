@@ -17,9 +17,24 @@ Route::resource('posts',PostController::class);
 Route::get('/{user}/posts',[DashboardController::class,'userPosts'])->name('posts.user');
 
 //! admin side routess...........................................................
-Route::view('/admin-dashboard','admin.dashboard')->name('admin.dashboard');
-Route::get('/admin-users',[UserController::class,'showUsers'])->name('admin.users');
-Route::get('/admin-users-posts',[UserController::class,'showPosts'])->name('admin.posts');
+Route::middleware(['auth','admin'])->group(function(){
+    Route::view('/admin-dashboard','admin.dashboard')->name('admin.dashboard');
+    Route::get('/admin-users',[UserController::class,'showUsers'])->name('admin.users');
+    Route::get('/admin-users-posts',[UserController::class,'showPosts'])->name('admin.posts');
+
+    //admin email verification
+    Route::get('/admin/email/verify',[AuthController::class,'verifyNotice'])->name('admin.verification.notice');
+    Route::post('/admin/email/verification-notification', [AuthController::class, 'verifyhandler'])
+        ->middleware('throttle:6,1')
+        ->name('admin.verification.send');
+    Route::get('/admin/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('admin.verification.verify');
+
+    // Admin password reset routes
+    Route::view('/admin/forgot-password', 'auth.admin.forgot-password')->name('admin.password.request');
+    Route::post('/admin/forgot-password', [ResetPasswordController::class, 'passwordEmail'])->name('admin.password.email');
+    Route::get('/admin/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('admin.password.reset');
+    Route::post('/admin/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('admin.password.update');
+});
 
 
 //routes for auth users
