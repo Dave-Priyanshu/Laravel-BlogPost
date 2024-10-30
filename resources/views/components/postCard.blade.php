@@ -20,10 +20,15 @@
         
         {{-- Author & Date --}}
         <div class="flex items-center text-sm text-gray-500 mb-4">
-            <span class="mr-2">Posted {{ $post->created_at->diffForHumans() }}</span>
+            @if ($post->created_at)
+                <span class="mr-2">Posted {{ $post->created_at->diffForHumans() }}</span>
+            @else
+                <span class="mr-2">Posted at an unknown time</span>
+            @endif
             <i class="fas fa-user-circle text-blue-500 text-lg mr-1"></i> 
             <a href="{{ route('posts.user', $post->user) }}" class="text-blue-500 font-medium hover:underline">{{ $post->user->username }}</a>
         </div>
+
 
         {{-- Body --}}
         <div class="text-gray-700 leading-relaxed">

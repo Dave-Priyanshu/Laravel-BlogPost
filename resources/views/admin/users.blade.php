@@ -6,6 +6,19 @@
             {{ session('message') }}
         </div>
     @endif
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" id="success-message" role="alert">
+            <strong class="font-bold">Success!</strong>
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" id="error-message" role="alert">
+            <strong class="font-bold">Error!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+    @endif
 
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table id="usersTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -16,6 +29,8 @@
                     <th>Created At</th>
                     <th>User Posts</th>
                     <th>Admin</th>
+                    <th>Actions</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +53,13 @@
                                 </button>
                             </form>
                         </td>
+                        <td class="py-2 px-4 border-b">
+                            <form action="{{ route('admin.user.destroy',$user->id) }}" method="POST" style="display:inline;onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600">Delete</button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -50,7 +72,14 @@
     <script>
         $(document).ready(function() {
             $('#usersTable').DataTable();
+
+            // Auto-hide success and error messages
+            setTimeout(function() {
+                $('#success-message, #error-message').fadeOut('slow');
+            }, 3000); // 3000 milliseconds = 5 seconds
+        
         });
+        
     </script>
     @endpush
 </x-adminLayout>

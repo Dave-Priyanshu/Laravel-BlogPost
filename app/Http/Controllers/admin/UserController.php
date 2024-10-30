@@ -55,5 +55,16 @@ class UserController extends Controller
         // Redirect with error message if not found
         return redirect()->route('admin.posts')->with('error', 'Post not found.');
     }
+
+    public function deleteUser($id){
+        $user = User::find($id);
+
+        if($user){
+            $user->delete();
+            return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
+        }
+        // Redirect with error message if not found
+        return redirect()->route('admin.users')->with('error', 'User not found.');
+    }
 }
 

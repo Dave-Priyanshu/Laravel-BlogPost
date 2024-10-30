@@ -28,6 +28,7 @@ Route::middleware(['auth', 'admin', 'redirectIfUser'])->group(function() {
     Route::patch('/admin/users/{user}/toggle', [UserController::class, 'toggleAdmin'])->name('admin.toggleAdmin');
     Route::get('/{user}/singlepost', [UserController::class, 'userPost'])->name('adUser.post');
     Route::delete('/admin/posts/{id}',[UserController::class,'destroy'])->name('admin.posts.destroy');
+    Route::delete('/admin/users/{id}',[UserController::class,'deleteUser'])->name('admin.user.destroy');
 
     // Admin email verification routes
     Route::get('/admin/email/verify', [AuthController::class, 'verifyNotice'])->name('admin.verification.notice');
