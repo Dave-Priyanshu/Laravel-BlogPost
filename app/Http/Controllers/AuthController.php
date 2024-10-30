@@ -71,8 +71,10 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
+        $credentials = $request->only('email', 'password');
+
         //try to login as user
-        if(Auth::attempt($feilds,$request->remember)){
+        if(Auth::attempt($credentials)){
             $user = Auth::user();
 
             //check login for admin

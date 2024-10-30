@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\EditorController;
@@ -6,28 +7,34 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ResetPasswordController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Middleware\RedirectIfAdmin;
+use App\Http\Middleware\RedirectIfUser;
 
+// Redirect from root to posts
+Route::redirect('/', 'posts');
 
-Route::redirect('/','posts');
+// Resource routes for posts
+Route::resource('posts', PostController::class);
 
-Route::resource('posts',PostController::class);
+// User's posts route
+Route::get('/{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
 
-Route::get('/{user}/posts',[DashboardController::class,'userPosts'])->name('posts.user');
+// Admin side routes
+Route::middleware(['auth', 'admin', 'redirectIfUser'])->group(function() {
+    Route::view('/admin-dashboard', 'admin.dashboard')->name('admin.dashboard');
+    Route::get('/admin-users', [UserController::class, 'showUsers'])->name('admin.users');
+    Route::get('/admin-users-posts', [UserController::class, 'showPosts'])->name('admin.posts');
+    Route::patch('/admin/users/{user}/toggle', [UserController::class, 'toggleAdmin'])->name('admin.toggleAdmin');
+    Route::get('/{user}/singlepost', [UserController::class, 'userPost'])->name('adUser.post');
+    Route::delete('/admin/posts/{id}',[UserController::class,'destroy'])->name('admin.posts.destroy');
 
-//! admin side routess...........................................................
-Route::middleware(['auth','admin'])->group(function(){
-    Route::view('/admin-dashboard','admin.dashboard')->name('admin.dashboard');
-    Route::get('/admin-users',[UserController::class,'showUsers'])->name('admin.users');
-    Route::get('/admin-users-posts',[UserController::class,'showPosts'])->name('admin.posts');
-
-    //admin email verification
-    Route::get('/admin/email/verify',[AuthController::class,'verifyNotice'])->name('admin.verification.notice');
+    // Admin email verification routes
+    Route::get('/admin/email/verify', [AuthController::class, 'verifyNotice'])->name('admin.verification.notice');
     Route::post('/admin/email/verification-notification', [AuthController::class, 'verifyhandler'])
-        ->middleware('throttle:6,1')
-        ->name('admin.verification.send');
-    Route::get('/admin/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware('signed')->name('admin.verification.verify');
+        ->middleware('throttle:6,1')->name('admin.verification.send');
+    Route::get('/admin/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
+        ->middleware('signed')->name('admin.verification.verify');
 
     // Admin password reset routes
     Route::view('/admin/forgot-password', 'auth.admin.forgot-password')->name('admin.password.request');
@@ -36,68 +43,57 @@ Route::middleware(['auth','admin'])->group(function(){
     Route::post('/admin/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('admin.password.update');
 });
 
+// Routes for authenticated users
+Route::middleware('auth')->group(function() {
+    // User dashboard route
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
 
-//routes for auth users
-Route::middleware('auth')->group(function(){
+    // Logout route
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    //dashboard route
-    Route::get('/dashboard',[DashboardController::class,'index'])->middleware('verified')->name('dashboard');
-    
-    //logout
-    Route::post('/logout',[AuthController::class,'logout'])->name('logout');
-
-    //email verificaiton notice route
-    Route::get('/email/verify',[AuthController::class,'verifyNotice'])->name('verification.notice');
-
-    //email verification handler
-    Route::get('/email/verify/{id}/{hash}', [AuthController::class,'verifyEmail'])->middleware('signed')->name('verification.verify');
-
-    //Resending the Verification Email
-    Route::post('/email/verification-notification', [AuthController::class,'verifyhandler'])->middleware( 'throttle:6,1')->name('verification.send');
+    // Email verification routes
+    Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
+        ->middleware('signed')->name('verification.verify');
+    Route::post('/email/verification-notification', [AuthController::class, 'verifyhandler'])
+        ->middleware('throttle:6,1')->name('verification.send');
 });
 
-
-//route for guest users
+// Routes for guest users
 Route::middleware('guest')->group(function() {
-    
-    // display register form only & get form data
-    Route::view('/register','auth.register')->name('register');
-    Route::post('/register',[AuthController::class,'register']);
-    
-    Route::view('/login','auth.login')->name('login');
-    Route::post('/login',[AuthController::class,'login']);
-    
-    //rules route
-    Route::view('/rules','rules')->name('rules');
+    // Display register form and handle form data
+    Route::view('/register', 'auth.register')->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
 
-    Route::get('/upcoming-features', function () {
+    Route::view('/login', 'auth.login')->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+
+    // Rules route
+    Route::view('/rules', 'rules')->name('rules');
+
+    // Upcoming features route
+    Route::get('/upcoming-features', function() {
         return view('upcomingFeatures');
     })->name('upcomingFeatures');
-    
 
-    //forgot password route
-    Route::view('/forgot-password','auth.forgot-password')->name('password.request');
-
-    //Handling the Form Submission
-    Route::post('/forgot-password', [ResetPasswordController::class,'passwordEmail']);
-
-    Route::get('/reset-password/{token}', [ResetPasswordController::class,'passwordReset'])->name('password.reset');
-
-
-    Route::post('/reset-password',[ResetPasswordController::class,'passwordUpdate'])->name('password.update');
+    // Forgot password route
+    Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+    Route::post('/forgot-password', [ResetPasswordController::class, 'passwordEmail']);
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'passwordReset'])->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'passwordUpdate'])->name('password.update');
 });
 
-Route::get('/editor', function(){
+// Other routes
+Route::get('/editor', function() {
     return view('editor');
 });
 
-Route::get('/about', function () {
+Route::get('/about', function() {
     return view('about');
 });
 
-
-//google login page
-Route::get('/googlelogin', function () {
+// Google login page
+Route::get('/googlelogin', function() {
     return view('googleLogin');
 })->name('googlelogin');
 

@@ -7,11 +7,13 @@
     <title>Document</title>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/editor.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class=" bg-slate-100 text-slate-900">
+<body class=" bg-slate-100 text-slate-900 font-lexend">
     <header class="bg-slate-800 shadow-lg">
         <nav class="flex justify-between items-center p-4">
             <!-- Home Link -->

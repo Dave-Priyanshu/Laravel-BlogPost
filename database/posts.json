@@ -1,0 +1,102 @@
+[
+    {
+        "user_id": 1,
+        "title": "Getting Started with Laravel",
+        "body": "Laravel is a powerful PHP framework for web artisans. In this post, we'll cover how to get started with Laravel, including installation and basic routing."
+    },
+    {
+        "user_id": 2,
+        "title": "Introduction to Vue.js",
+        "body": "Vue.js is a progressive JavaScript framework used for building user interfaces. This article will introduce you to its core concepts."
+    },
+    {
+        "user_id": 3,
+        "title": "Mastering React Hooks",
+        "body": "React hooks provide a powerful way to use state and other React features without writing a class. Let’s explore some common hooks."
+    },
+    {
+        "user_id": 4,
+        "title": "Understanding Docker",
+        "body": "Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. This post will guide you through its basics."
+    },
+    {
+        "user_id": 5,
+        "title": "A Deep Dive into Python Generators",
+        "body": "Generators in Python are a convenient way to work with large datasets. This article explains how to create and use generators effectively."
+    },
+    {
+        "user_id": 1,
+        "title": "Getting Started with Angular",
+        "body": "Angular is a platform for building mobile and desktop web applications. In this post, we will set up a new Angular project."
+    },
+    {
+        "user_id": 2,
+        "title": "Exploring the Basics of Machine Learning",
+        "body": "Machine learning is a subset of artificial intelligence that focuses on building systems that learn from data. Let's break down the basics."
+    },
+    {
+        "user_id": 3,
+        "title": "Introduction to RESTful APIs",
+        "body": "RESTful APIs are a powerful way to communicate between applications. This post explains the principles and how to build one."
+    },
+    {
+        "user_id": 4,
+        "title": "Understanding Asynchronous JavaScript",
+        "body": "Asynchronous programming is a key concept in JavaScript. This article explains callbacks, promises, and async/await."
+    },
+    {
+        "user_id": 5,
+        "title": "A Beginner's Guide to GraphQL",
+        "body": "GraphQL is a query language for APIs that allows clients to request exactly the data they need. This guide covers its fundamental concepts."
+    },
+    {
+        "user_id": 7,
+        "title": "Exploring Node.js",
+        "body": "Node.js is a JavaScript runtime built on Chrome's V8 engine. In this post, we'll cover its benefits and how to set up a basic server."
+    },
+    {
+        "user_id": 8,
+        "title": "The Importance of Version Control with Git",
+        "body": "Version control is essential for tracking changes in your code. This article discusses Git and its features."
+    },
+    {
+        "user_id": 1,
+        "title": "Introduction to TypeScript",
+        "body": "TypeScript is a superset of JavaScript that adds static types. This post explains how to get started with TypeScript."
+    },
+    {
+        "user_id": 2,
+        "title": "Building Responsive Websites with Tailwind CSS",
+        "body": "Tailwind CSS is a utility-first CSS framework that allows for rapid design and prototyping. This guide shows how to get started."
+    },
+    {
+        "user_id": 3,
+        "title": "Understanding SQL vs NoSQL Databases",
+        "body": "Databases can be classified into SQL and NoSQL types. This article compares the two and helps you choose the right one for your project."
+    },
+    {
+        "user_id": 4,
+        "title": "Getting Started with Firebase",
+        "body": "Firebase is a platform that provides a variety of tools for app development. This post covers its core features and how to get started."
+    },
+    {
+        "user_id": 5,
+        "title": "Best Practices for Writing Clean Code",
+        "body": "Writing clean code is essential for maintainability and readability. This article outlines some best practices to follow."
+    },
+    {
+        "user_id": 7,
+        "title": "Exploring the Benefits of Cloud Computing",
+        "body": "Cloud computing offers scalable resources and services over the internet. This post discusses its benefits and challenges."
+    },
+    {
+        "user_id": 8,
+        "title": "An Introduction to Cybersecurity",
+        "body": "Cybersecurity is vital in protecting systems from digital attacks. This article introduces its main concepts and best practices."
+    },
+    {
+        "user_id": 12,
+        "title": "Getting Started with Swift for iOS Development",
+        "body": "Swift is the programming language for iOS development. This post covers how to set up your environment and start building apps."
+    }
+]

@@ -1,38 +1,56 @@
-
 <x-adminLayout>
     <h1 class="text-2xl font-bold mb-4">All User List</h1>
 
-    <!-- DataTable -->
-    <table id="usersTable" class="min-w-full bg-white border border-gray-200">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class="py-2 px-4 text-left">Username</th>
-                <th class="py-2 px-4 text-left">Email</th>
-                <th class="py-2 px-4 text-left">Created At</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
+    @if (session('message'))
+        <div class="bg-green-500 text-white p-3 rounded mb-4">
+            {{ session('message') }}
+        </div>
+    @endif
+
+    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table id="usersTable" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead>
                 <tr>
-                    <td class="py-2 px-4">{{ $user->username }}</td>
-                    <td class="py-2 px-4">{{ $user->email }}</td>
-                    <td class="py-2 px-4">{{ $user->created_at->format('M d, Y') }}</td>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Created At</th>
+                    <th>User Posts</th>
+                    <th>Admin</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->username }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->created_at->format('M d, Y') }}</td>
+                        <td>
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <a href="{{ url( $user->id . '/singlepost') }}">View Posts</a>
+                            </button>
+                        </td>
+                        <td>
+                            <form action="{{ route('admin.toggleAdmin', $user) }}" method="POST" class="flex items-center">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    {{ $user->is_admin ? 'Remove Admin' : 'Make Admin' }}
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
     @push('scripts')
-<script>
-    $(document).ready(function() {
-        $('#usersTable').DataTable({
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#usersTable').DataTable();
         });
-    });
-</script>
-@endpush
-
+    </script>
+    @endpush
 </x-adminLayout>
