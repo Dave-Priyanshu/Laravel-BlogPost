@@ -31,7 +31,7 @@
                 @enderror
             </div>
 
-            {{-- Post Body --}}
+            {{-- MainBKP Post Body --}}
             <div class="mb-6">
                 <label for="body" class="block text-sm font-medium text-gray-700">Post Body</label>
                 <textarea name="body" rows="5" 
@@ -40,7 +40,19 @@
                 @error('body')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
-            </div>
+            </div> 
+
+            {{--MainBKP Post Body --}}
+            {{-- <div class="mb-6">
+                <label for="body" class="block text-sm font-medium text-gray-700">Post Body</label>
+                <textarea id="editor" name="body" rows="5" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 transition duration-200 ease-in-out" 
+                        placeholder="Write your post content here">{{ old('body') }}</textarea>
+                @error('body')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div> --}}
+
 
             {{-- Post Image --}}
             <div class="mb-4">
@@ -88,4 +100,22 @@
     <div class="mt-6">
         {{ $posts->links() }}
     </div>
+
+    {{-- Initialize TinyMCE --}}
+{{-- <script src="https://cdn.tiny.cloud/1/3o0p13byj5h37ta3gj09tn6rm16mmlz012g87dboh1cvx0fm/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#editor',
+        plugins: 'lists link image charmap preview',
+        toolbar: 'undo redo | styles | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | preview',
+        height: 300,
+        branding: false,
+        setup: function (editor) {
+            editor.on('change', function () {
+                editor.save(); // Automatically saves the content into the textarea
+            });
+        }
+    });
+</script> --}}
+
 </x-layout>

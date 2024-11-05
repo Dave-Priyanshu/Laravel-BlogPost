@@ -26,7 +26,7 @@
                 <tr>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Created At</th>
+                    <th>Total Post</th>
                     <th>User Posts</th>
                     <th>Admin</th>
                     <th>Actions</th>
@@ -38,7 +38,8 @@
                     <tr>
                         <td>{{ $user->username }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at->format('M d, Y') }}</td>
+                        {{-- <td>{{ $user->created_at->format('M d, Y') }}</td> --}}
+                        <td class="">{{ $user->posts->count() }}</td>
                         <td>
                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 <a href="{{ url( $user->id . '/singlepost') }}">View Posts</a>

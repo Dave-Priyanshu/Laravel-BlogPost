@@ -9,7 +9,7 @@
                 class="{{ $fullSize ? 'w-50 h-50 px-2':'h-full w-auto ' }} object-contain">
         @else    
             <img src="{{ asset('storage/posts_images/default.png') }}" alt="Default Image" 
-                 class="{{ $fullSize?'w-50 h-50 px-2': ' h-full w-auto max-w-full' }} object-contain">
+                 class="{{ $fullSize?'w-30 h-50 px-2': ' h-full w-auto max-w-full' }} object-contain">
         @endif
     </div>
 
@@ -31,11 +31,24 @@
 
 
         {{-- Body --}}
-        <div class="text-gray-700 leading-relaxed">
+        {{-- <div class="text-gray-700 leading-relaxed">
             @if ($full)
                 <p>{{ $post->body }}</p>
             @else
-                <p>{{ Str::words($post->body, 15) }}</p>
+                <p>{{ Str::words($post->body, 15) }}</p> --}}
+                {{-- Read More Button --}}
+                {{-- <a href="{{ route('posts.show', $post) }}" class="inline-block mt-4 text-sm text-blue-500 hover:text-blue-700 font-semibold">
+                    Read More →
+                </a>
+            @endif
+        </div> --}}
+
+        {{-- New Text Editor  Body --}}
+        <div class="text-gray-700 leading-relaxed">
+            @if ($full)
+                {!! $post->body !!}  {{-- Render HTML content without escaping --}}
+            @else
+                <p>{{ Str::words(strip_tags($post->body), 15) }}</p>
                 {{-- Read More Button --}}
                 <a href="{{ route('posts.show', $post) }}" class="inline-block mt-4 text-sm text-blue-500 hover:text-blue-700 font-semibold">
                     Read More →

@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div class="flex flex-col items-center justify-center bg-gray-100">
         <!-- Google Login Coming Soon Message -->
         <div class="text-center mb-6">
             <h1 class="text-2xl font-bold text-gray-800 mb-2">Google Login Coming Soon!</h1>
@@ -17,7 +17,7 @@
 
                 <!-- Right side: Accounts list with images -->
                 <div class="w-1/2 p-4">
-                    <div class="flex items-center mb-4 hover:bg-gray-100 p-2 rounded-md transition">
+                    <div class="flex items-center mb-4 border-b border-gray-200  hover:bg-gray-100 p-2 rounded-md transition">
                         <img src="{{ asset('assets/images/man.png') }}" class="rounded-full mr-3 w-10 h-10"> <!-- Adjusted size -->
                         <div>
                             <p class="text-sm text-gray-800">john.doe@example.com</p>
