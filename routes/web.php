@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Middleware\RedirectIfAdmin;
 use App\Http\Middleware\RedirectIfUser;
 
@@ -97,6 +98,14 @@ Route::get('/about', function() {
 Route::get('/googlelogin', function() {
     return view('googleLogin');
 })->name('googlelogin');
+
+// analytics route
+Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics');
+Route::get('/admin/analytics', [AnalyticsController::class, 'showAnalyticsDashboard']);
+Route::get('/admin/analytics/data', [AnalyticsController::class, 'getRealTimeData']);
+
+
+
 
 
 // ! dashboard chart route

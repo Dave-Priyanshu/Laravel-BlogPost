@@ -17,7 +17,7 @@
 
             <!-- Posts Card -->
             <div class="bg-white rounded-lg shadow-lg p-6 w-72 text-center transition transform hover:scale-105 hover:shadow-xl">
-                <a href="" class="text-blue-700 hover:text-blue-800">
+                <a href="{{ route('admin.posts') }}" class="text-blue-700 hover:text-blue-800">
                     <div class="icon text-blue-600 mb-4">
                         <i class="fas fa-pencil-alt text-5xl"></i>
                     </div>
@@ -28,7 +28,7 @@
 
             <!-- Analytics Card -->
             <div class="bg-white rounded-lg shadow-lg p-6 w-72 text-center transition transform hover:scale-105 hover:shadow-xl">
-                <a href="" class="text-blue-700 hover:text-blue-800">
+                <a href="{{ route('analytics') }}" class="text-blue-700 hover:text-blue-800">
                     <div class="icon text-blue-600 mb-4">
                         <i class="fas fa-chart-line text-5xl"></i>
                     </div>

@@ -76,7 +76,7 @@
     {{-- Users Posts --}}
     <h2 class="font-bold text-2xl text-gray-800 mb-6 border-b pb-4">Your Recent Posts</h2>
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         @foreach ($posts as $post)
             <x-postCard :post="$post">
                 {{-- Update post button --}}

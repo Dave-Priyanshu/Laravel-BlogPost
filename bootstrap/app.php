@@ -4,6 +4,7 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\RedirectIfAdmin;
 use App\Http\Middleware\RedirectIfUser;
+use App\Http\Middleware\TrackPageViews;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AdminMiddleware::class,
             'redirectIfAdmin' => RedirectIfAdmin::class,
             'redirectIfUser' => RedirectIfUser::class,
+            'trackPageViews' => TrackPageViews::class
             ]);
         
     })

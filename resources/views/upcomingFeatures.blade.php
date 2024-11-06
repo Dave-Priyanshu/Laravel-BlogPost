@@ -23,7 +23,8 @@
 
             {{-- Responsive Design --}}
             <li class="flex items-start space-x-4">
-                <i class="fas fa-mobile-alt text-purple-600 mt-1"></i>
+                {{-- <i class="fas fa-mobile-alt text-purple-600 mt-1"></i> --}}
+                <i class="fas fa-mobile-alt" style="color: #7e3af2; margin-top: 0.50rem;"></i>
                 <div>
                     <h2 class="text-xl font-semibold">Responsive Design</h2>
                     <p>Ensure the platform is fully responsive for mobile, tablet, and desktop.</p>
@@ -32,7 +33,8 @@
 
             {{-- Post Drafts --}}
             <li class="flex items-start space-x-4">
-                <i class="fas fa-file-alt text-yellow-600 mt-1"></i>
+                {{-- <i class="fas fa-file-alt text-yellow-600 mt-1"></i> --}}
+                <i class="fas fa-file-alt" style="color: #f0ad4e; margin-top: 0.50rem;"></i>
                 <div>
                     <h2 class="text-xl font-semibold">Post Drafts</h2>
                     <p>Enable users to save posts as drafts before publishing.</p>
@@ -41,7 +43,8 @@
 
             {{-- Rich Text Editor --}}
             <li class="flex items-start space-x-4">
-                <i class="fas fa-pencil-alt text-pink-600 mt-1"></i>
+                {{-- <i class="fas fa-pencil-alt text-pink-600 mt-1"></i> --}}
+                <i class="fas fa-pencil-alt" style="color: #e83e8c; margin-top: 0.50rem;"></i>
                 <div>
                     <h2 class="text-xl font-semibold">Rich Text Editor</h2>
                     <p>Add support for a rich text editor to enhance the post creation experience.</p>
@@ -50,7 +53,8 @@
 
             {{-- Social Media Sharing --}}
             <li class="flex items-start space-x-4">
-                <i class="fas fa-share-alt text-blue-400 mt-1"></i>
+                {{-- <i class="fas fa-share-alt text-blue-400 mt-1"></i> --}}
+                <i class="fas fa-share-alt" style="color: #17a2b8; margin-top: 0.50rem;"></i>
                 <div>
                     <h2 class="text-xl font-semibold">Social Media Sharing</h2>
                     <p>Allow users to share posts directly to their social media profiles.</p>
@@ -59,7 +63,8 @@
 
             {{-- Like/Upvote Feature --}}
             <li class="flex items-start space-x-4">
-                <i class="fas fa-thumbs-up text-red-600 mt-1"></i>
+                {{-- <i class="fas fa-thumbs-up text-red-600 mt-1"></i> --}}
+                <i class="fas fa-thumbs-up" style="color: #dc3545; margin-top: 0.50rem;"></i>
                 <div>
                     <h2 class="text-xl font-semibold">Like/Upvote Feature</h2>
                     <p>Add a like or upvote feature for user posts to increase engagement.</p>
